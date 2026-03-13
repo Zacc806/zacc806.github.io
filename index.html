@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zacc | Python Backend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #00e5a0;
+    --accent2: #7c6af7;
+    --text: #e8e8f0;
+    --muted: #5a5a72;
+    --card: #13131c;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--accent); letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 6rem 3rem 3rem;
+    max-width: 1000px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .hero h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 8vw, 6rem); line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: 0.9rem; color: var(--muted); max-width: 540px;
+    margin-bottom: 3rem; line-height: 1.8;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem; border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+    letter-spacing: 0.05em; cursor: pointer; text-decoration: none;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #000; font-weight: 500; border: none; }
+  .btn-primary:hover { background: #00ffb3; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    margin-top: 5rem; border: 1px solid var(--border);
+  }
+  .hero-stat {
+    padding: 1.5rem; text-align: center; background: var(--surface);
+  }
+  .hero-stat:not(:last-child) { border-right: 1px solid var(--border); }
+  .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); }
+  .hero-stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+
+  /* BG GRID */
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  .hero, section { position: relative; z-index: 1; }
+
+  /* SECTIONS */
+  section { max-width: 1000px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-label {
+    display: flex; align-items: center; gap: 1rem;
+    color: var(--accent); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 3rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+  /* EXPERIENCE */
+  .exp-item {
+    border-left: 2px solid var(--border);
+    padding: 0 0 3rem 2rem; position: relative;
+    transition: border-color 0.3s;
+  }
+  .exp-item:last-child { padding-bottom: 0; }
+  .exp-item::before {
+    content: ''; position: absolute; left: -5px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--muted);
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .exp-item:hover { border-color: var(--accent); }
+  .exp-item:hover::before { border-color: var(--accent); background: var(--accent); }
+  .exp-date { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .exp-company { color: var(--accent); font-size: 0.8rem; margin-bottom: 1rem; }
+  .exp-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.8; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tag {
+    padding: 0.2rem 0.7rem; border: 1px solid var(--border);
+    font-size: 0.7rem; color: var(--muted); border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.75rem; border-radius: 4px;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: default;
+  }
+  .project-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .project-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .project-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.7; margin-bottom: 1.25rem; }
+  .project-link { color: var(--accent2); font-size: 0.75rem; text-decoration: none; letter-spacing: 0.05em; }
+  .project-link:hover { text-decoration: underline; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skill-group { }
+  .skill-group-title { color: var(--accent); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
+  .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-list li {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--text); font-size: 0.82rem;
+  }
+  .skill-list li::before { content: '▸'; color: var(--accent); font-size: 0.7rem; }
+
+  /* CONTACT */
+  .contact-wrapper {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 3rem; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 2rem;
+  }
+  .contact-text h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .contact-text p { color: var(--muted); font-size: 0.85rem; max-width: 400px; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    color: var(--muted); text-decoration: none; font-size: 0.8rem;
+    transition: color 0.2s;
+  }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-icon { color: var(--accent); width: 16px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem 3rem;
+    text-align: center; color: var(--muted); font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* TERMINAL PROMPT */
+  .prompt { color: var(--muted); }
+  .prompt .dollar { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero h1 { animation: fadeUp 0.8s ease both; }
+  .hero-sub { animation: fadeUp 0.8s 0.15s ease both; }
+  .hero-actions { animation: fadeUp 0.8s 0.25s ease both; }
+  .hero-grid { animation: fadeUp 0.8s 0.35s ease both; }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .contact-wrapper { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">zacc.dev</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Available for freelance</div>
+  <h1>Python<br/>Backend<br/><span>Developer</span></h1>
+  <p class="hero-sub">
+    I build production-grade backend systems — APIs, microservices, payment integrations, and data pipelines.
+    Based in Almaty, Kazakhstan. Working remotely worldwide.
+  </p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="hero-grid">
+    <div class="hero-stat">
+      <div class="hero-stat-num">4.5+</div>
+      <div class="hero-stat-label">Years commercial exp</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100k+</div>
+      <div class="hero-stat-label">API requests / day</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5+</div>
+      <div class="hero-stat-label">Production services</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">01 / Experience</div>
+
+  <div class="exp-item">
+    <div class="exp-date">JAN 2026 — PRESENT · 3 months</div>
+    <div class="exp-title">Python Backend Developer</div>
+    <div class="exp-company">Nancome — EV Charging Platform, Kazakhstan</div>
+    <div class="exp-desc">
+      Designing and owning the Nancome API — a backend service for electric vehicle chargers across Kazakhstan.
+      Integrated two national payment systems (Kaspi QR, Halyk ePay), implemented OCPP-compatible charger management,
+      and deployed the full stack on Yandex Cloud (kz1-a region) with managed PostgreSQL, Redis, and Kafka over TLS.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
+      <span class="tag">Kafka</span><span class="tag">Docker</span><span class="tag">Yandex Cloud</span><span class="tag">OCPP</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">AUG 2023 — JAN 2026 · 2 years 6 months</div>
+    <div class="exp-title">Middle Python Backend Developer</div>
+    <div class="exp-company">Silky — E-Commerce Startup (0 → Production)</div>
+    <div class="exp-desc">
+      Built the entire backend infrastructure for a mobile commerce platform from scratch.
+      Developed multi-provider Logistics and Payment APIs using Factory Pattern, integrated Chinese
+      marketplace APIs (1688 &amp; Taobao) with custom parsers and normalizers — Taobao handles 100k+ requests/day.
+      Enforced pytest staging gates (fixtures, marks) before every production deploy.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">FastAPI</span><span class="tag">Celery</span><span class="tag">Redis</span>
+      <span class="tag">Kafka</span><span class="tag">Docker</span><span class="tag">pytest</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">DEC 2022 — AUG 2023 · 9 months</div>
+    <div class="exp-title">Freelance Python Developer</div>
+    <div class="exp-company">Upwork</div>
+    <div class="exp-desc">
+      Automation bots, Telegram bots, and MVPs with computer vision. Developed features for existing
+      production systems and integrated third-party services for various clients.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">Telegram API</span><span class="tag">Computer Vision</span><span class="tag">APIs</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">MAY 2023 · Almaty, Kazakhstan</div>
+    <div class="exp-title">🥈 Hackathon — 2nd Place</div>
+    <div class="exp-company">Computer Vision Hackathon · Weapon Detection</div>
+    <div class="exp-desc">
+      Developed a weapon detection algorithm based on a published research paper approach:
+      generated a fully synthetic training dataset by spinning a 3D gun model in Unity with randomized
+      backgrounds and lighting, then capturing screenshots via C# scripts. Trained a CV model on this
+      synthetic data — eliminating the need for real-world labeled images entirely.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Unity / C#</span><span class="tag">Synthetic Data</span><span class="tag">Object Detection</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">MARCH 2023 · 1 month</div>
+    <div class="exp-title">🏆 Hackathon — 1st Place</div>
+    <div class="exp-company">International Monetary Fund · Amman, Jordan</div>
+    <div class="exp-desc">
+      Won first place at an IMF-hosted hackathon. Built a data exchange solution for Yemen's Ministry of Finance
+      designed to operate under severely limited connectivity conditions.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">Data Exchange</span><span class="tag">IMF</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">FEB 2022 — NOV 2022 · 10 months</div>
+    <div class="exp-title">Junior Data Scientist</div>
+    <div class="exp-company">AIC — Anti-Fraud Systems, Kazakhstan</div>
+    <div class="exp-desc">
+      Developed fraud detection algorithms for a second-tier bank's AntiFraud system.
+      Wrote detection logic in SPLUNK's proprietary query language, analyzed fraud patterns,
+      and processed data from multiple sources — both Hot Bucket logs and Cold Bucket archives — with performance optimization.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">SPLUNK</span><span class="tag">Data Analysis</span><span class="tag">Fraud Detection</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">JUL 2021 — FEB 2022 · 8 months</div>
+    <div class="exp-title">Python Developer</div>
+    <div class="exp-company">ИнфоТех Сервис</div>
+    <div class="exp-desc">
+      Developed new features and integrated third-party services into existing production systems.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">Backend</span><span class="tag">Integrations</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">02 / Projects</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">⚡</div>
+      <div class="project-name">Nancome EV API</div>
+      <div class="project-desc">
+        OCPP-compatible EV charger management backend. Payment integrations with Kaspi QR and Halyk ePay.
+        Deployed on Yandex Cloud Kazakhstan region with full TLS stack.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🏭</div>
+      <div class="project-name">Logistics & Payment APIs</div>
+      <div class="project-desc">
+        Multi-provider Factory Pattern services for dynamic logistics and payment routing.
+        Webhook-based payment confirmation, custom payload mappers per provider.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">FastAPI</span><span class="tag">Kafka</span><span class="tag">Celery</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🇨🇳</div>
+      <div class="project-name">1688 &amp; Taobao Integration</div>
+      <div class="project-desc">
+        Full interpretation and normalization of Chinese marketplace APIs.
+        Custom JSON parsers built from scratch. Taobao service sustains 100k+ requests/day reliably.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🏗️</div>
+      <div class="project-name">Building Code Compliance Tool</div>
+      <div class="project-desc">
+        Automated validation of AutoCAD/BIM files against Kazakh building codes (СНиП, ГОСТ).
+        Replaces manual regulatory review for an engineering firm designing factories.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Firebase</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🚦</div>
+      <div class="project-name">Barrier Gate ANPR System</div>
+      <div class="project-desc">
+        Research and architecture for 5 automatic barrier gates with license plate recognition
+        and Kaspi QR payment integration for a residential complex in Almaty.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">ANPR</span><span class="tag">Kaspi QR</span><span class="tag">IoT</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📸</div>
+      <div class="project-name">Self-Hosted Infra (Immich)</div>
+      <div class="project-desc">
+        Ubuntu home server running Immich photo management via Docker Compose.
+        Static IP via NetworkManager/Netplan, custom storage paths, full self-hosted stack.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">Docker</span><span class="tag">Ubuntu</span><span class="tag">Networking</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">03 / Skills</div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Core</div>
+      <ul class="skill-list">
+        <li>Python</li>
+        <li>FastAPI</li>
+        <li>SQLAlchemy</li>
+        <li>Pydantic</li>
+        <li>pytest</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data & Messaging</div>
+      <ul class="skill-list">
+        <li>PostgreSQL</li>
+        <li>Redis</li>
+        <li>Apache Kafka</li>
+        <li>Celery</li>
+        <li>Celery Beat</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Infrastructure</div>
+      <ul class="skill-list">
+        <li>Docker / Compose</li>
+        <li>Yandex Cloud</li>
+        <li>Ubuntu Server</li>
+        <li>Nginx</li>
+        <li>Git / GitHub</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Integrations</div>
+      <ul class="skill-list">
+        <li>Kaspi QR</li>
+        <li>Halyk ePay</li>
+        <li>Firebase Auth</li>
+        <li>OCPP Protocol</li>
+        <li>1688 / Taobao API</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">04 / Contact</div>
+  <div class="contact-wrapper">
+    <div class="contact-text">
+      <h2>Let's work<br/><span style="color:var(--accent)">together.</span></h2>
+      <p>Open to freelance projects, remote contracts, and consulting. Based in Almaty, Kazakhstan — working globally.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:zakirzhangozin@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉</span> zakirzhangozin@gmail.com
+      </a>
+      <a href="https://github.com/Zacc806" class="contact-link" target="_blank">
+        <span class="contact-link-icon">⌥</span> github.com/Zacc806
+      </a>
+      <a href="https://www.upwork.com/freelancers/~01d30243859edb9b10" class="contact-link" target="_blank">
+        <span class="contact-link-icon">◈</span> Upwork Profile
+      </a>
+      <a href="https://www.linkedin.com/in/zakir-zhangozin/" class="contact-link" target="_blank">
+        <span class="contact-link-icon">◉</span> LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <s
