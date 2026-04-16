@@ -28,7 +28,6 @@
     overflow-x: hidden;
   }
 
-  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
@@ -42,7 +41,6 @@
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex; flex-direction: column; justify-content: center;
@@ -90,7 +88,6 @@
   .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); }
   .hero-stat-label { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
 
-  /* BG GRID */
   body::before {
     content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
     background-image:
@@ -101,7 +98,6 @@
   }
   .hero, section { position: relative; z-index: 1; }
 
-  /* SECTIONS */
   section { max-width: 1000px; margin: 0 auto; padding: 5rem 3rem; }
   .section-label {
     display: flex; align-items: center; gap: 1rem;
@@ -111,7 +107,6 @@
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   h2 { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
 
-  /* EXPERIENCE */
   .exp-item {
     border-left: 2px solid var(--border);
     padding: 0 0 3rem 2rem; position: relative;
@@ -137,7 +132,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* PROJECTS */
   .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
   .project-card {
     background: var(--card); border: 1px solid var(--border);
@@ -149,12 +143,8 @@
   .project-icon { font-size: 1.5rem; margin-bottom: 1rem; }
   .project-name { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
   .project-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.7; margin-bottom: 1.25rem; }
-  .project-link { color: var(--accent2); font-size: 0.75rem; text-decoration: none; letter-spacing: 0.05em; }
-  .project-link:hover { text-decoration: underline; }
 
-  /* SKILLS */
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-  .skill-group { }
   .skill-group-title { color: var(--accent); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem; }
   .skill-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
   .skill-list li {
@@ -163,7 +153,6 @@
   }
   .skill-list li::before { content: '▸'; color: var(--accent); font-size: 0.7rem; }
 
-  /* CONTACT */
   .contact-wrapper {
     background: var(--card); border: 1px solid var(--border);
     padding: 3rem; display: flex; justify-content: space-between; align-items: center;
@@ -186,11 +175,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* TERMINAL PROMPT */
-  .prompt { color: var(--muted); }
-  .prompt .dollar { color: var(--accent); }
-
-  /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .hero h1 { animation: fadeUp 0.8s ease both; }
   .hero-sub { animation: fadeUp 0.8s 0.15s ease both; }
@@ -217,12 +201,11 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag">Available for freelance</div>
   <h1>Python<br/>Backend<br/><span>Developer</span></h1>
   <p class="hero-sub">
-    I build production-grade backend systems — APIs, microservices, payment integrations, and data pipelines.
+    I build production backend systems: APIs, microservices, AI agents, and payment integrations.
     Based in Almaty, Kazakhstan. Working remotely worldwide.
   </p>
   <div class="hero-actions">
@@ -231,7 +214,7 @@
   </div>
   <div class="hero-grid">
     <div class="hero-stat">
-      <div class="hero-stat-num">4.5+</div>
+      <div class="hero-stat-num">5+</div>
       <div class="hero-stat-label">Years commercial exp</div>
     </div>
     <div class="hero-stat">
@@ -250,13 +233,31 @@
   <div class="section-label">01 / Experience</div>
 
   <div class="exp-item">
-    <div class="exp-date">JAN 2026 — PRESENT · 3 months</div>
+    <div class="exp-date">2026 — PRESENT</div>
+    <div class="exp-title">AI Tools Developer</div>
+    <div class="exp-company">Daedalus Mind Project — Factory Design & Engineering</div>
+    <div class="exp-desc">
+      Built a set of AI tools for an engineering firm that produces AutoCAD and Revit factory projections.
+      The main tool is a document control assistant: engineers can ask it to pull up drawings, check revision history,
+      or surface outstanding approvals via a chat interface. There is also a compliance scanner that reads project
+      documents and flags anything that conflicts with applicable building codes (SNiP, Eurocode), pointing
+      directly to the relevant clause. An OCR pipeline (Tesseract / EasyOCR) handles scanned drawings and PDFs before
+      they go through the LLM checker.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">LLM</span>
+      <span class="tag">MCP</span><span class="tag">OCR</span><span class="tag">n8n</span><span class="tag">PostgreSQL</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">2026 — PRESENT</div>
     <div class="exp-title">Python Backend Developer</div>
     <div class="exp-company">Nancome — EV Charging Platform, Kazakhstan</div>
     <div class="exp-desc">
-      Designing and owning the Nancome API — a backend service for electric vehicle chargers across Kazakhstan.
-      Integrated two national payment systems (Kaspi QR, Halyk ePay), implemented OCPP-compatible charger management,
-      and deployed the full stack on Yandex Cloud (kz1-a region) with managed PostgreSQL, Redis, and Kafka over TLS.
+      Own the Nancome API, which manages electric vehicle chargers across Kazakhstan.
+      Integrated Kaspi QR and Halyk ePay for payments, implemented OCPP charger management,
+      and deployed the stack on Yandex Cloud (kz1-a) with managed PostgreSQL, Redis, and Kafka over TLS.
     </div>
     <div class="exp-tags">
       <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
@@ -265,18 +266,39 @@
   </div>
 
   <div class="exp-item">
-    <div class="exp-date">AUG 2023 — JAN 2026 · 2 years 6 months</div>
-    <div class="exp-title">Middle Python Backend Developer</div>
-    <div class="exp-company">Silky — E-Commerce Startup (0 → Production)</div>
+    <div class="exp-date">2025</div>
+    <div class="exp-title">AI Integration Engineer</div>
+    <div class="exp-company">EsGis — Real Estate Platform</div>
     <div class="exp-desc">
-      Built the entire backend infrastructure for a mobile commerce platform from scratch.
-      Developed multi-provider Logistics and Payment APIs using Factory Pattern, integrated Chinese
-      marketplace APIs (1688 &amp; Taobao) with custom parsers and normalizers — Taobao handles 100k+ requests/day.
-      Enforced pytest staging gates (fixtures, marks) before every production deploy.
+      Set up an MCP server that exposes the property search backend to AI agents.
+      Built two agents on top of it: one handles the conversation, the other calls the filter methods
+      (price, district, property type, floor, area) when needed. The whole pipeline runs through n8n,
+      so user intent flows from chat to the FastAPI backend without extra glue code.
+      Users can describe what they want in plain language and skip the filter form entirely.
     </div>
     <div class="exp-tags">
-      <span class="tag">FastAPI</span><span class="tag">Celery</span><span class="tag">Redis</span>
-      <span class="tag">Kafka</span><span class="tag">Docker</span><span class="tag">pytest</span>
+      <span class="tag">FastAPI</span><span class="tag">MCP</span><span class="tag">Multi-agent LLM</span>
+      <span class="tag">n8n</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span>
+    </div>
+  </div>
+
+  <div class="exp-item">
+    <div class="exp-date">AUG 2023 — JAN 2026 · 2 years 5 months</div>
+    <div class="exp-title">Python Backend Developer</div>
+    <div class="exp-company">Silky — E-Commerce Startup (0 to production)</div>
+    <div class="exp-desc">
+      Built the backend for a mobile commerce platform from scratch.
+      The standout piece is an AI gift assistant in the app: a user can say something like "find a gift for my mother
+      around 5,000 KZT" and the assistant generates ideas, then searches 1688 and Taobao for matching products
+      and returns product cards (image, price, link) right in the chat. The n8n workflow handles intent parsing,
+      API dispatch, and result formatting so the mobile client stays thin.
+      Also built the Logistics and Payment APIs (Factory Pattern, multi-provider), the 1688 and Taobao integrations
+      with custom parsers (Taobao handles 100k+ requests/day), and the Celery Beat jobs that keep data fresh.
+    </div>
+    <div class="exp-tags">
+      <span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">n8n</span>
+      <span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">Kafka</span>
+      <span class="tag">Docker</span><span class="tag">1688 API</span><span class="tag">Taobao API</span>
     </div>
   </div>
 
@@ -285,8 +307,8 @@
     <div class="exp-title">Android Developer (Kotlin)</div>
     <div class="exp-company">ArboNaut — Forest Inventory App, Finland</div>
     <div class="exp-desc">
-      Worked on a mobile application for professional forest inventory management.
-      Developed new features and resolved bugs across the Kotlin Android codebase.
+      Worked on a mobile app for professional forest inventory management.
+      Built new features and fixed bugs across the Kotlin Android codebase.
     </div>
     <div class="exp-tags">
       <span class="tag">Kotlin</span><span class="tag">Android</span><span class="tag">Mobile</span>
@@ -298,7 +320,7 @@
     <div class="exp-title">Freelance Python Developer</div>
     <div class="exp-company">Upwork</div>
     <div class="exp-desc">
-      Automation bots, Telegram bots, and MVPs with computer vision. Developed features for existing
+      Automation bots, Telegram bots, and MVPs with computer vision. Built features for existing
       production systems and integrated third-party services for various clients.
     </div>
     <div class="exp-tags">
@@ -308,26 +330,25 @@
 
   <div class="exp-item">
     <div class="exp-date">MAY 2023 · Almaty, Kazakhstan</div>
-    <div class="exp-title">🥈 Hackathon — 2nd Place</div>
+    <div class="exp-title">Hackathon — 2nd Place</div>
     <div class="exp-company">Computer Vision Hackathon · Weapon Detection</div>
     <div class="exp-desc">
-      Developed a weapon detection algorithm based on a published research paper approach:
-      generated a fully synthetic training dataset by spinning a 3D gun model in Unity with randomized
-      backgrounds and lighting, then capturing screenshots via C# scripts. Trained a CV model on this
-      synthetic data — eliminating the need for real-world labeled images entirely.
+      Built a weapon detection model based on a published research paper.
+      Generated a fully synthetic training dataset by spinning a 3D gun model in Unity with randomized
+      backgrounds and lighting, capturing screenshots via C# scripts. No real-world labeled images needed.
     </div>
     <div class="exp-tags">
-      <span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Unity / C#</span><span class="tag">Synthetic Data</span><span class="tag">Object Detection</span>
+      <span class="tag">Python</span><span class="tag">Computer Vision</span><span class="tag">Unity / C#</span><span class="tag">Synthetic Data</span>
     </div>
   </div>
 
   <div class="exp-item">
-    <div class="exp-date">MARCH 2023 · 1 month</div>
-    <div class="exp-title">🏆 Hackathon — 1st Place</div>
-    <div class="exp-company">International Monetary Fund · Amman, Jordan</div>
+    <div class="exp-date">MARCH 2023 · Amman, Jordan</div>
+    <div class="exp-title">Hackathon — 1st Place</div>
+    <div class="exp-company">International Monetary Fund</div>
     <div class="exp-desc">
       Won first place at an IMF-hosted hackathon. Built a data exchange solution for Yemen's Ministry of Finance
-      designed to operate under severely limited connectivity conditions.
+      that works under severely limited connectivity.
     </div>
     <div class="exp-tags">
       <span class="tag">Python</span><span class="tag">Data Exchange</span><span class="tag">IMF</span>
@@ -339,21 +360,21 @@
     <div class="exp-title">Junior Data Scientist</div>
     <div class="exp-company">AIC — Anti-Fraud Systems, Kazakhstan</div>
     <div class="exp-desc">
-      Developed fraud detection algorithms for a second-tier bank's AntiFraud system.
-      Wrote detection logic in SPLUNK's proprietary query language, analyzed fraud patterns,
-      and processed data from multiple sources — both Hot Bucket logs and Cold Bucket archives — with performance optimization.
+      Wrote fraud detection algorithms for a bank's AntiFraud system in SPLUNK SPL.
+      Analyzed fraud patterns across Hot Bucket (live logs) and Cold Bucket (historical data),
+      with a focus on query performance at scale.
     </div>
     <div class="exp-tags">
-      <span class="tag">Python</span><span class="tag">SPLUNK</span><span class="tag">Data Analysis</span><span class="tag">Fraud Detection</span>
+      <span class="tag">Python</span><span class="tag">SPLUNK</span><span class="tag">Fraud Detection</span>
     </div>
   </div>
 
   <div class="exp-item">
     <div class="exp-date">JUL 2021 — FEB 2022 · 8 months</div>
     <div class="exp-title">Python Developer</div>
-    <div class="exp-company">ИнфоТех Сервис</div>
+    <div class="exp-company">InfoTech Service</div>
     <div class="exp-desc">
-      Developed new features and integrated third-party services into existing production systems.
+      Built new features and integrated third-party services into existing production systems.
     </div>
     <div class="exp-tags">
       <span class="tag">Python</span><span class="tag">Backend</span><span class="tag">Integrations</span>
@@ -367,20 +388,56 @@
   <div class="projects-grid">
 
     <div class="project-card">
-      <div class="project-icon">⚡</div>
-      <div class="project-name">Nancome EV API</div>
+      <div class="project-icon">&#x1F916;</div>
+      <div class="project-name">EsGis Property Search Agents</div>
       <div class="project-desc">
-        OCPP-compatible EV charger management backend. Payment integrations with Kaspi QR and Halyk ePay.
-        Deployed on Yandex Cloud Kazakhstan region with full TLS stack.
+        MCP server with two agents for a real estate platform. One handles conversation,
+        the other calls filter methods when needed. Orchestrated with n8n, no custom glue code.
       </div>
       <div class="exp-tags">
-        <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span>
+        <span class="tag">MCP</span><span class="tag">Multi-agent</span><span class="tag">n8n</span>
       </div>
     </div>
 
     <div class="project-card">
-      <div class="project-icon">🏭</div>
-      <div class="project-name">Logistics & Payment APIs</div>
+      <div class="project-icon">&#x1F381;</div>
+      <div class="project-name">Silky AI Gift Assistant</div>
+      <div class="project-desc">
+        In-app assistant that takes a natural language gift request, generates ideas via LLM,
+        searches 1688 and Taobao, and returns product cards in the chat. Built on n8n + FastAPI.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">LLM</span><span class="tag">n8n</span><span class="tag">1688 / Taobao</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">&#x1F3D7;</div>
+      <div class="project-name">Daedalus Mind Compliance Tools</div>
+      <div class="project-desc">
+        Document control assistant and regulatory scanner for an AutoCAD/Revit engineering firm.
+        OCR pipeline for scanned drawings, LLM-powered cross-reference against SNiP and Eurocode.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">LLM</span><span class="tag">OCR</span><span class="tag">MCP</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">&#x26A1;</div>
+      <div class="project-name">Nancome EV API</div>
+      <div class="project-desc">
+        OCPP-compatible EV charger management backend with Kaspi QR and Halyk ePay integrations.
+        Deployed on Yandex Cloud Kazakhstan region with full TLS stack.
+      </div>
+      <div class="exp-tags">
+        <span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">OCPP</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">&#x1F3ED;</div>
+      <div class="project-name">Logistics &amp; Payment APIs</div>
       <div class="project-desc">
         Multi-provider Factory Pattern services for dynamic logistics and payment routing.
         Webhook-based payment confirmation, custom payload mappers per provider.
@@ -391,11 +448,11 @@
     </div>
 
     <div class="project-card">
-      <div class="project-icon">🇨🇳</div>
+      <div class="project-icon">&#x1F1E8;&#x1F1F3;</div>
       <div class="project-name">1688 &amp; Taobao Integration</div>
       <div class="project-desc">
-        Full interpretation and normalization of Chinese marketplace APIs.
-        Custom JSON parsers built from scratch. Taobao service sustains 100k+ requests/day reliably.
+        Custom parsers and normalizers for both Chinese marketplace APIs built from scratch.
+        Taobao service sustains 100k+ requests/day reliably.
       </div>
       <div class="exp-tags">
         <span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Docker</span>
@@ -403,31 +460,7 @@
     </div>
 
     <div class="project-card">
-      <div class="project-icon">🏗️</div>
-      <div class="project-name">Building Code Compliance Tool</div>
-      <div class="project-desc">
-        Automated validation of AutoCAD/BIM files against Kazakh building codes (СНиП, ГОСТ).
-        Replaces manual regulatory review for an engineering firm designing factories.
-      </div>
-      <div class="exp-tags">
-        <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Firebase</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-icon">🚦</div>
-      <div class="project-name">Barrier Gate ANPR System</div>
-      <div class="project-desc">
-        Research and architecture for 5 automatic barrier gates with license plate recognition
-        and Kaspi QR payment integration for a residential complex in Almaty.
-      </div>
-      <div class="exp-tags">
-        <span class="tag">ANPR</span><span class="tag">Kaspi QR</span><span class="tag">IoT</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-icon">📸</div>
+      <div class="project-icon">&#x1F4F8;</div>
       <div class="project-name">Self-Hosted Infra (Immich)</div>
       <div class="project-desc">
         Ubuntu home server running Immich photo management via Docker Compose.
@@ -456,13 +489,23 @@
       </ul>
     </div>
     <div class="skill-group">
-      <div class="skill-group-title">Data & Messaging</div>
+      <div class="skill-group-title">Data &amp; Messaging</div>
       <ul class="skill-list">
         <li>PostgreSQL</li>
         <li>Redis</li>
         <li>Apache Kafka</li>
         <li>Celery</li>
         <li>Celery Beat</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI &amp; Automation</div>
+      <ul class="skill-list">
+        <li>LLM integration</li>
+        <li>MCP servers</li>
+        <li>Multi-agent systems</li>
+        <li>n8n workflows</li>
+        <li>OCR pipelines</li>
       </ul>
     </div>
     <div class="skill-group">
@@ -494,24 +537,28 @@
   <div class="contact-wrapper">
     <div class="contact-text">
       <h2>Let's work<br/><span style="color:var(--accent)">together.</span></h2>
-      <p>Open to freelance projects, remote contracts, and consulting. Based in Almaty, Kazakhstan — working globally.</p>
+      <p>Open to freelance projects, remote contracts, and consulting. Based in Almaty, Kazakhstan, working globally.</p>
     </div>
     <div class="contact-links">
       <a href="mailto:zakirzhangozin@gmail.com" class="contact-link">
-        <span class="contact-link-icon">✉</span> zakirzhangozin@gmail.com
+        <span class="contact-link-icon">&#x2709;</span> zakirzhangozin@gmail.com
       </a>
       <a href="https://github.com/Zacc806" class="contact-link" target="_blank">
-        <span class="contact-link-icon">⌥</span> github.com/Zacc806
+        <span class="contact-link-icon">&#x2325;</span> github.com/Zacc806
       </a>
       <a href="https://www.upwork.com/freelancers/~01d30243859edb9b10" class="contact-link" target="_blank">
-        <span class="contact-link-icon">◈</span> Upwork Profile
+        <span class="contact-link-icon">&#x25C8;</span> Upwork Profile
       </a>
       <a href="https://www.linkedin.com/in/zakir-zhangozin/" class="contact-link" target="_blank">
-        <span class="contact-link-icon">◉</span> LinkedIn
+        <span class="contact-link-icon">&#x25C9;</span> LinkedIn
       </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <s
+  <span>zacc.dev &nbsp;/&nbsp; Almaty, Kazakhstan</span>
+</footer>
+
+</body>
+</html>
